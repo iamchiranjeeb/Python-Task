@@ -1,0 +1,40 @@
+{% extends "task/base.html"%}
+{% block content %}
+
+<h3 style="color:#800000;">Enter The Below Credentials: </h3>
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{error}}
+        </div>
+        {% endif %}
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <label for="id_firstName">FirstName:</label><br>
+            <input type="text" value="{{emp.firstName}}" placeholder="First Name" name="firstName" maxlength="30" required="" id="id_firstName"><br><br>
+
+            <label for="id_lastName">LastName:</label><br>
+            <input type="text" value="{{emp.lastName}}" placeholder="Last Name" name="lastName" maxlength="30" required="" id="id_lastName"><br><br>
+
+            <label for="id_email">Email:</label><br>
+            <input type="email" value="{{emp.email}}" placeholder="Email ID" name="email" maxlength="50" required="" id="id_email"><br><br>
+
+            <label for="id_phone">Phone:</label><br>
+            <input type="tel" value="{{emp.phone}}" placeholder="eg:+91 10 digit number" name="phone" maxlength="128" required="" id="id_phone"><br><br>
+
+            <label for="id_DOB">DOB:</label><br>
+            <input type="date" value="{{emp.DOB}}" name="DOB"  id="id_DOB"><br><br>
+
+            <label for="id_img">Image:</label><br>
+            <input type="file" value="{{emp.img.url}}" name="img" accept="image/*" id="id_img"><br><br>
+
+            <input type="submit" class="btn btn-outline-danger" value="Update" />
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

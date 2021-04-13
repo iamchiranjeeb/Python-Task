@@ -1,0 +1,30 @@
+{% extends "task/base.html"%}
+
+{% block content %}
+<h2>{{emp.firstName}}'s profile</h2>
+<img src="{{ emp.img.url }}" class="img-responsive" style="width: 10%; float: left; margin-right: 10px;" />
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="profcolor">
+    <ul>
+        <li>Employee ID : {{emp.id}}</li>
+        <li>Employee Name : {{emp.firstName}} {{emp.lastName}}</li>
+        <li>Employee Email : {{emp.email}}</li>
+        <li>Employee Contact : {{emp.phone}}</li>
+        <li>Employee DOB : {{emp.DOB}}</li>
+    </ul>
+</div>
+<a href="#" class="btn btn-danger" onclick="$('#delete').click()">Delete Profile</a> 
+<form method="POST" style='display: none;' action="{% url 'viewuserprofile' emp.id %}">
+    {% csrf_token %}
+    <input id="delete" type="submit" value="Delete Todo" />
+</form>
+
+{% endblock %}

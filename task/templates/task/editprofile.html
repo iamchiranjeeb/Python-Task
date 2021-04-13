@@ -1,0 +1,19 @@
+{% extends "task/base.html"%}
+
+{% block content %}
+
+
+<div class="alert alert-danger" role="alert">
+    {{error}}
+</div>
+
+
+
+<form method ="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Update"/>
+</form>
+
+
+{% endblock %}

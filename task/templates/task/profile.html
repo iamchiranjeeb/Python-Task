@@ -1,0 +1,22 @@
+{% extends "task/base.html"%}
+
+{% block content %}
+
+{% if obj %}
+<h3>Total no of Employees: {{ obj.count }} </h3>
+<br>
+<br>
+{% for ob in obj %}
+<h2>
+<ul>
+<li>{{ob.firstName}} {{ob.lastName}} <a style="color:#800000;"  href="{% url 'viewuserprofile' ob.id %}">View Profile</a> <a style="color: #800000;" href="{% url 'edituserprofile' ob.id %}">Edit Profile</a> </li>
+</ul>
+</h2>
+{% endfor %}
+{% else %}
+<h2>No Employess has been adde <a href="{% url 'createprofile' %}">add employees</a></h2>
+{% endif %}
+
+
+
+{% endblock %}
