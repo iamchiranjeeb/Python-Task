@@ -6,6 +6,7 @@ from django.contrib.auth import login,logout,authenticate
 from .forms import EmployeeForm
 from .models import EmployeesTable
 from .passwords import Special
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def signupuser(request):
@@ -64,6 +65,7 @@ def logoutuser(request):
         logout(request)
         return redirect('loginuser')
 
+@login_required
 def userprofile(request):
     emp_det = EmployeesTable.objects.filter(user=request.user)
     # profile = User.objects.get(id=request.user.id)
@@ -71,6 +73,7 @@ def userprofile(request):
     # obj = get_object_or_404(EmployeesTable,user=profile)
     return render(request,'task/profile.html',{'obj':emp_det})
 
+@login_required
 def createprofile(request):
     if request.method == 'GET':
         return render(request,'task/createprofile2.html',{'form':EmployeeForm()})
@@ -86,7 +89,8 @@ def createprofile(request):
 
         except Exception as e:
             return render(request,'task/createprofile2.html',{'form':EmployeeForm(),'error':e})
-
+        
+@login_required
 def viewuserprofile(request,emp_pk):
     emp = get_object_or_404(EmployeesTable,pk=emp_pk,user=request.user)
     if request.method == 'GET':
@@ -95,7 +99,7 @@ def viewuserprofile(request,emp_pk):
         emp.delete()
         return redirect('userprofile')
 
-
+@login_required
 def edituserprofile(request,emp_pk):
     emp = get_object_or_404(EmployeesTable,pk=emp_pk,user=request.user)
     if request.method == 'GET':
